@@ -6,7 +6,7 @@ uvicorn[standard]
 
 # Database
 supabase
-pinecone-client
+pinecone
 
 # AI/ML
 openai
