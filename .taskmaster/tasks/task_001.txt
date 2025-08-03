@@ -1,6 +1,6 @@
 # Task ID: 1
 # Title: Set up PDF parsing module with GPT-4o vision
-# Status: in-progress
+# Status: done
 # Dependencies: None
 # Priority: high
 # Description: Implement a PDF parsing module that uses GPT-4o vision capabilities to extract content from IS code PDFs and convert them to structured Markdown format
