@@ -1,0 +1,11 @@
+# Task ID: 3
+# Title: Implement vector embedding generation with OpenAI
+# Status: pending
+# Dependencies: 1, 2
+# Priority: high
+# Description: Create a module to generate vector embeddings using OpenAI's text-embedding-3-small model for all document chunks
+# Details:
+
+
+# Test Strategy:
+

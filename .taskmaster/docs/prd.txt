@@ -1,0 +1,162 @@
+IS Knowledge Hub - AI-Powered Construction Standards Engine
+
+PRODUCT REQUIREMENTS DOCUMENT
+
+PROJECT OVERVIEW:
+Build an AI-powered platform that transforms Indian Standards (IS) Codes for construction into a structured, searchable, and intelligent knowledge base. The system will parse BIS documents (IS 10262, IS 456, IS 383, IS 2386, etc.) into clean structured Markdown, embed them into a vector database, and enable chat-based RAG (retrieval-augmented generation) using advanced LLMs like GPT-4o or Gemini 2.5 Pro.
+
+TARGET USERS:
+- Site engineers and quality control (QC) personnel
+- RMC (ready-mix concrete) lab technicians
+- Construction managers and consultants
+- Material manufacturers and suppliers
+- AI agents operating in dispatch, QA/QC, or test automation
+- Auditors and compliance teams during project inspections
+
+CORE FUNCTIONAL REQUIREMENTS:
+
+1. PDF Parsing and Ingestion Module
+   - Upload IS code PDFs through Streamlit interface
+   - Parse each page using GPT-4o vision capabilities
+   - Convert to structured Markdown with:
+     * YAML frontmatter (title, version, code, publication date)
+     * Proper heading hierarchy (## Clause 5.1, ### Sub-clause 5.1.1)
+     * Tables converted to markdown format
+     * Equations in LaTeX syntax ($...$)
+     * Image references with captions
+   - Handle multi-column layouts and complex formatting
+   - Save parsed .md files with proper naming convention
+   - Support batch processing of multiple PDFs
+
+2. Document Processing Pipeline
+   - Chunk markdown documents by clause headers
+   - Maintain ~1000 token chunks with 200 token overlap
+   - Preserve metadata: clause ID, code name, version, section, page numbers
+   - Handle nested clause structures (5.1, 5.1.1, 5.1.1.a)
+   - Generate unique identifiers for each chunk
+   - Support re-chunking on edited documents
+
+3. Vector Embedding System
+   - Generate embeddings using text-embedding-3-small or bge-base-en-v1.5
+   - Store embeddings in Pinecone vector database
+   - Include rich metadata for filtering and retrieval
+   - Support batch embedding generation
+   - Handle embedding updates for modified content
+   - Implement efficient similarity search
+
+4. Search and Retrieval Engine
+   - Semantic search across all IS code content
+   - Support natural language queries
+   - Filter by IS code, version, or specific sections
+   - Return top-k relevant chunks with scores
+   - Highlight matching clauses in results
+   - Support exact phrase matching alongside semantic search
+
+5. RAG Question-Answering System
+   - Process user queries through GPT-4o or Gemini 2.5 Pro
+   - Retrieve relevant context from vector database
+   - Generate comprehensive answers with:
+     * Direct clause citations (e.g., IS 10262:2019 – Clause 4.2.1)
+     * Relevant tables and formulas
+     * Cross-references to related clauses
+   - Implement fallback between LLM providers
+   - Stream responses for better UX
+
+6. Streamlit User Interface
+   - Clean, professional dashboard layout
+   - Upload interface with drag-and-drop support
+   - Search interface with auto-suggestions
+   - Results display with expandable clause views
+   - Export functionality for:
+     * Full IS codes as PDF/Markdown
+     * Selected clauses or sections
+     * Search results with citations
+   - Dark/light theme toggle
+   - Mobile-responsive design
+
+7. Supabase Integration
+   - Store document metadata (name, version, upload date, user)
+   - Track clause-to-file mappings
+   - User authentication and role management
+   - Query history and analytics
+   - Audit logs for compliance
+   - Version control for document updates
+
+8. API Development
+   - FastAPI endpoints for all core functions
+   - RESTful API design
+   - Authentication via JWT tokens
+   - Rate limiting and usage tracking
+   - Swagger documentation
+   - WebSocket support for real-time updates
+
+TECHNICAL REQUIREMENTS:
+
+1. Performance and Scalability
+   - Handle PDFs up to 500 pages
+   - Process queries in < 2 seconds
+   - Support 100+ concurrent users
+   - Implement caching for frequent queries
+   - Lazy loading for large result sets
+
+2. Data Quality and Accuracy
+   - 95%+ accuracy in PDF parsing
+   - Preserve all formatting nuances
+   - Handle scanned PDFs with OCR
+   - Validate parsed content structure
+   - Flag parsing errors for review
+
+3. Security and Compliance
+   - Encrypt all data at rest and in transit
+   - Role-based access control
+   - Audit trail for all operations
+   - GDPR compliance for user data
+   - Regular security audits
+
+4. Monitoring and Analytics
+   - Track query patterns and popular clauses
+   - Monitor system performance metrics
+   - User engagement analytics
+   - Error tracking and alerting
+   - Usage reports for billing
+
+5. Integration Capabilities
+   - Webhook support for external systems
+   - Export to common formats (JSON, CSV, XML)
+   - Integration with construction ERPs
+   - Support for custom plugins
+   - API client libraries
+
+FUTURE ENHANCEMENTS:
+
+1. Multi-version Comparison
+   - Upload multiple versions of same IS code
+   - Auto-compare clauses and flag changes
+   - Version-aware search and retrieval
+   - Amendment tracking
+
+2. Engineering Calculators
+   - Mix design calculator based on IS 10262
+   - Durability checker from IS 456
+   - Exposure class classifier
+   - Material quantity estimators
+
+3. AI Agent Framework
+   - Autonomous mix design generation
+   - Compliance checking agents
+   - QC test result validation
+   - Report generation assistants
+
+4. Advanced Features
+   - Voice-based queries
+   - Multi-language support
+   - Collaborative annotations
+   - Mobile applications
+   - Offline mode support
+
+SUCCESS CRITERIA:
+- Successfully parse and index 10+ major IS codes
+- Achieve < 2 second query response time
+- 90%+ user satisfaction score
+- 95%+ uptime availability
+- Positive feedback from pilot users in construction industry

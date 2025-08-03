@@ -1,0 +1,11 @@
+# Task ID: 5
+# Title: Build semantic search and retrieval engine
+# Status: pending
+# Dependencies: 4
+# Priority: medium
+# Description: Develop a search engine that performs semantic search across IS code content using vector similarity
+# Details:
+
+
+# Test Strategy:
+

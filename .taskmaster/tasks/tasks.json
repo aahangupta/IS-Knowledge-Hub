@@ -1,0 +1,73 @@
+{
+  "master": {
+    "tasks": [
+      {
+        "id": 1,
+        "title": "Set up PDF parsing module with GPT-4o vision",
+        "description": "Implement a PDF parsing module that uses GPT-4o vision capabilities to extract content from IS code PDFs and convert them to structured Markdown format",
+        "details": "",
+        "testStrategy": "",
+        "status": "done",
+        "dependencies": [],
+        "priority": "high",
+        "subtasks": []
+      },
+      {
+        "id": 2,
+        "title": "Create document chunking and metadata extraction system",
+        "description": "Implement a system to chunk parsed Markdown documents by clause headers, maintaining ~1000 token chunks with proper metadata",
+        "details": "",
+        "testStrategy": "",
+        "status": "done",
+        "dependencies": [],
+        "priority": "high",
+        "subtasks": []
+      },
+      {
+        "id": 3,
+        "title": "Implement vector embedding generation with OpenAI",
+        "description": "Create a module to generate vector embeddings using OpenAI's text-embedding-3-small model for all document chunks",
+        "details": "",
+        "testStrategy": "",
+        "status": "pending",
+        "dependencies": [
+          1,
+          2
+        ],
+        "priority": "high",
+        "subtasks": []
+      },
+      {
+        "id": 4,
+        "title": "Set up Pinecone vector database integration",
+        "description": "Configure Pinecone database for storing and searching vector embeddings with metadata filtering",
+        "details": "",
+        "testStrategy": "",
+        "status": "pending",
+        "dependencies": [
+          3
+        ],
+        "priority": "high",
+        "subtasks": []
+      },
+      {
+        "id": 5,
+        "title": "Build semantic search and retrieval engine",
+        "description": "Develop a search engine that performs semantic search across IS code content using vector similarity",
+        "details": "",
+        "testStrategy": "",
+        "status": "pending",
+        "dependencies": [
+          4
+        ],
+        "priority": "medium",
+        "subtasks": []
+      }
+    ],
+    "metadata": {
+      "created": "2025-08-03T12:34:54.167Z",
+      "updated": "2025-08-03T12:51:17.984Z",
+      "description": "Tasks for master context"
+    }
+  }
+}

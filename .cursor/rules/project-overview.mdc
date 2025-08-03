@@ -1,0 +1,80 @@
+---
+alwaysApply: true
+---
+
+# 🏗️ Project Overview – IS Code Construction Knowledge Engine
+
+## 🔍 Purpose
+
+This project aims to build an AI-powered platform that transforms Indian Standards (IS) Codes for construction into a structured, searchable, and intelligent knowledge base. It enables engineers, QC personnel, auditors, RMC plants, and field teams to instantly access regulatory insights, mix design rules, and code-compliant procedures.
+
+The system will parse BIS documents like **IS 10262, IS 456, IS 383, IS 2386**, etc., into **clean structured Markdown**, embed them into a **vector database**, and enable **chat-based RAG (retrieval-augmented generation)** using advanced LLMs like GPT-4o or Gemini 2.5 Pro.
+
+---
+
+## 🧑‍🎓 Target Users
+
+- Site engineers and quality control (QC) personnel
+- RMC (ready-mix concrete) lab technicians
+- Construction managers and consultants
+- Material manufacturers and suppliers
+- AI agents operating in dispatch, QA/QC, or test automation
+- Auditors and compliance teams during project inspections
+
+---
+
+## 🎯 Why This Matters
+
+Indian construction projects rely heavily on BIS codes for specifications, material design, durability, and compliance. Yet these codes are locked in unstructured PDFs and hard to query in real time.
+
+This system:
+- Makes IS code clauses queryable, contextual, and citeable
+- Reduces dependency on experts for interpreting mix design clauses
+- Enables faster onboarding of QC teams and AI agents
+- Tracks code changes over time for regulatory traceability
+- Forms the backbone of AI agents that can run tests, generate mix designs, and assist during site audits
+
+---
+
+## 🔧 Functional Highlights
+
+- Parse IS code PDFs into structured markdown using GPT-4o
+- Chunk by clause/section for precise semantic search
+- Embed markdown into Pinecone for fast RAG
+- Ask code-related questions and cite exact clauses
+- Export markdown, tables, LaTeX, or full code sections
+- Track amendments between versions (future)
+- Streamlit-based frontend for rapid interface
+
+---
+
+## 🧱 Code Stack
+
+- **Language:** Python
+- **Frontend:** Streamlit
+- **Vector DB:** Pinecone
+- **Metadata DB:** Supabase
+- **LLMs:** GPT-4o, Gemini 2.5 Pro
+- **Embedding Models:** `text-embedding-3-small` / `bge-base-en-v1.5`
+- **PDF parsing:** GPT-4o prompt-based per page
+- **Dev tooling:** Cursor, Claude 4, version-controlled prompts
+
+---
+
+## 📦 Long-Term Vision
+
+This becomes the foundation for:
+
+- A **Construction AI Assistant** that understands codes, procedures, and test data
+- An **LLM-integrated QC dashboard** for mix design validation and compliance checks
+- A **live regulatory hub** for real-time BIS code updates and amendments
+- A **training tool** for young engineers to understand concrete mix proportioning, testing, and IS norms
+- A **partner product with Concrete.ai, Ultratech, or RMC labs** to power their internal QA systems
+
+---
+
+## ✳️ Owned By
+
+**PillarX**  
+Construction materials manufacturer, aggregate supplier, and AI developer focused on building India's most measured, tech-forward concrete ecosystem.
+

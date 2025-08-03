@@ -1,0 +1,95 @@
+---
+alwaysApply: true
+---
+
+# 📦 Features – IS Code AI Knowledge Engine
+
+This system transforms BIS IS Code PDFs into structured Markdown, embeds them for semantic search, and enables intelligent clause-level queries using GPT-4o/Gemini.
+
+---
+
+## ✅ Core Features (MVP)
+
+### 📘 IS Code Ingestion
+- [x] Upload IS code PDFs (e.g., IS 10262, IS 456)
+- [x] Parse each page using GPT-4o
+- [x] Convert to structured Markdown:
+  - YAML frontmatter (`title`, `version`, `code`, etc.)
+  - Headings and clause references (`## Clause 5.1`)
+  - Tables in markdown format
+  - Equations in LaTeX syntax (`$...$`)
+  - Image references (`![Figure](figures/FigX.png)`)
+- [x] Save parsed `.md` file per document
+
+### 🧱 Chunking & Embedding
+- [x] Chunk markdown by clause headers or ~1000 tokens
+- [x] Add metadata: clause ID, code name, version, section, line range
+- [x] Embed using `text-embedding-3-small` or `bge-base-en-v1.5`
+- [x] Store chunks in Pinecone vector database
+
+### 🔍 Search & Query
+- [x] Semantic search over IS code content
+- [x] Retrieval-augmented generation (RAG) via GPT-4o or Gemini 2.5 Pro
+- [x] Return answer with linked clause citations (e.g., `IS 10262:2019 – Clause 4.2.1`)
+- [x] Multi-model querying fallback (GPT ↔ Claude/Gemini)
+
+### 🖥️ Streamlit User Interface
+- [x] Upload IS code files (PDF)
+- [x] View parsed Markdown clause-by-clause
+- [x] Ask questions and get GPT answers with clause references
+- [x] Export:
+  - Full IS code
+  - Selected clause or section
+  - Markdown or plain text
+
+---
+
+## ⚙️ Engineering Features
+
+### 🗃 Supabase Integration
+- [x] Store metadata for uploaded codes (name, version, uploader, timestamp)
+- [x] Track clause-to-file mapping
+- [x] Future: Store edits, clause version history, audit logs
+
+### 📦 Data Pipeline
+- [x] Parse → Markdown → Chunk → Embed → Store (automated flow)
+- [x] Retry/error detection during parsing or chunking
+- [x] Re-chunking supported on edited Markdown
+
+---
+
+## 🚀 Planned / Future Features
+
+### 🛠 Code Amendments & Comparison
+- [ ] Upload multiple versions of same IS code
+- [ ] Auto-compare clauses and flag changes
+- [ ] Show side-by-side diff (e.g., `IS 10262:2009 vs 2019`)
+- [ ] Version-aware clause linking in search
+
+### 📐 Concrete Engineering Tools
+- [ ] Mix design calculator based on IS 10262 clause logic
+- [ ] Durability checker from IS 456:2000 Table 5 + exposure category
+- [ ] Auto-classification of concrete exposure class from site input
+
+### 🤖 LLM Agent Functions
+- [ ] Agent to generate mix proportions from raw input
+- [ ] Agent to explain clause to junior engineers
+- [ ] Agent to validate trial mix against IS constraints
+- [ ] Agent-based QC assistant for RMC plant
+
+### 🖼 Diagram & Figure Handling
+- [ ] OCR or GPT-4o Vision to extract tables, graphs from scanned images
+- [ ] Store figure captions and linkable references
+- [ ] Image vector indexing for clause ↔ figure search
+
+---
+
+## 🧪 Enterprise & Pro Features (Phase 3+)
+
+- [ ] Role-based login and access via Supabase Auth
+- [ ] Live clause editing + Git-style version tracking
+- [ ] Feedback/comments per clause from QC engineers
+- [ ] External API integration for ERPs, QA systems, LIMS
+- [ ] Editable prompt tuning per department or company use
+
+---

@@ -1,0 +1,49 @@
+chunk_id,token_count,char_count,start_char,end_char,content_preview,meta_title,meta_code,meta_version,meta_type,meta_subject,meta_source_file,meta_is_number,meta_year,meta_Section,meta_clause_id,meta_clause_title,meta_section,meta_partial_chunk,meta_content_type,meta_preserved,meta_Subsection,meta_Clause
+IS 456_0,45,165,126,291,"# IS 456:2000 - PLAIN AND REINFORCED CONCRETE - CODE OF PRACTICE  
+## 1 SCOPE  
+This standard deals ...",IS 456:2000 - Plain and Reinforced Concrete,IS 456,2000,Indian Standard,Concrete,IS_456_2000.md,456,2000,1 SCOPE,1,SCOPE,1,,,,,
+IS 456_1_p0,19,94,291,385,"## 2 REFERENCES  
+The Indian Standards listed below are necessary adjuncts to this standard:  ",IS 456:2000 - Plain and Reinforced Concrete,IS 456,2000,Indian Standard,Concrete,IS_456_2000.md,456,2000,2 REFERENCES,2,REFERENCES,2,True,,,,
+IS 456_1_table1,59,224,385,609,"| IS No. | Title |
+|--------|-------|
+| IS 269:1989 | Specification for ordinary Portland cement |
+|...",IS 456:2000 - Plain and Reinforced Concrete,IS 456,2000,Indian Standard,Concrete,IS_456_2000.md,456,2000,2 REFERENCES,2,REFERENCES,2,,table,True,,
+IS 456_2,31,109,609,718,"## 3 TERMINOLOGY  
+### 3.1 Concrete  
+A mixture of cement, water, and aggregates, with or without ad...",IS 456:2000 - Plain and Reinforced Concrete,IS 456,2000,Indian Standard,Concrete,IS_456_2000.md,456,2000,3 TERMINOLOGY,3,TERMINOLOGY,3,,,,3.1 Concrete,
+IS 456_3,15,73,718,791,"### 3.2 Reinforced Concrete  
+Concrete with embedded steel reinforcement.",IS 456:2000 - Plain and Reinforced Concrete,IS 456,2000,Indian Standard,Concrete,IS_456_2000.md,456,2000,3 TERMINOLOGY,3.2,Reinforced Concrete,3,,,,3.2 Reinforced Concrete,
+IS 456_4_p0,16,65,791,856,"## 4 SYMBOLS  
+The following symbols are used in this standard:  ",IS 456:2000 - Plain and Reinforced Concrete,IS 456,2000,Indian Standard,Concrete,IS_456_2000.md,456,2000,4 SYMBOLS,4,SYMBOLS,4,True,,,,
+IS 456_4_equation1,31,119,856,975,"$$f_{ck} = \text{Characteristic compressive strength of concrete}$$  
+$$f_y = \text{Characteristic s...",IS 456:2000 - Plain and Reinforced Concrete,IS 456,2000,Indian Standard,Concrete,IS_456_2000.md,456,2000,4 SYMBOLS,4,SYMBOLS,4,,equation,True,,
+IS 456_5,76,262,975,1237,"## 5 MATERIALS  
+### 5.1 Cement  
+#### 5.1.1 General  
+Cement used shall conform to one of the follo...",IS 456:2000 - Plain and Reinforced Concrete,IS 456,2000,Indian Standard,Concrete,IS_456_2000.md,456,2000,5 MATERIALS,5,MATERIALS,5,,,,5.1 Cement,5.1.1 General
+IS 456_6,28,115,1237,1352,"#### 5.1.2 Storage of Cement  
+Cement shall be stored in such a manner as to prevent deterioration d...",IS 456:2000 - Plain and Reinforced Concrete,IS 456,2000,Indian Standard,Concrete,IS_456_2000.md,456,2000,5 MATERIALS,5.1.2,Storage of Cement,5,,,,5.1 Cement,5.1.2 Storage of Cement
+IS 456_7,31,100,1352,1452,"### 5.2 Aggregates  
+#### 5.2.1 General Requirements  
+All aggregates shall comply with IS 383:1970.",IS 456:2000 - Plain and Reinforced Concrete,IS 456,2000,Indian Standard,Concrete,IS_456_2000.md,456,2000,5 MATERIALS,5.2,Aggregates,5,,,,5.2 Aggregates,5.2.1 General Requirements
+IS 456_8_p0,28,110,1452,1562,"#### 5.2.2 Size of Aggregates  
+The nominal maximum size of coarse aggregate should be as large as p...",IS 456:2000 - Plain and Reinforced Concrete,IS 456,2000,Indian Standard,Concrete,IS_456_2000.md,456,2000,5 MATERIALS,5.2.2,Size of Aggregates,5,True,,,5.2 Aggregates,5.2.2 Size of Aggregates
+IS 456_8_table1,41,158,1562,1720,"| Type of Work | Maximum Size |
+|--------------|--------------|
+| Reinforced concrete | 20 mm |
+| Ma...",IS 456:2000 - Plain and Reinforced Concrete,IS 456,2000,Indian Standard,Concrete,IS_456_2000.md,456,2000,5 MATERIALS,5.2.2,Size of Aggregates,5,,table,True,5.2 Aggregates,5.2.2 Size of Aggregates
+IS 456_9,49,190,1720,1910,"### 5.3 Water  
+#### 5.3.1 Quality of Mixing Water  
+Water used for mixing and curing shall be clean...",IS 456:2000 - Plain and Reinforced Concrete,IS 456,2000,Indian Standard,Concrete,IS_456_2000.md,456,2000,5 MATERIALS,5.3,Water,5,,,,5.3 Water,5.3.1 Quality of Mixing Water
+IS 456_10,89,293,1910,2203,"## 6 CONCRETE MIX PROPORTIONING  
+### 6.1 Mix Design  
+#### 6.1.1 General  
+The mix proportion shall...",IS 456:2000 - Plain and Reinforced Concrete,IS 456,2000,Indian Standard,Concrete,IS_456_2000.md,456,2000,6 CONCRETE MIX PROPORTIONING,6,CONCRETE MIX PROPORTIONING,6,,,,6.1 Mix Design,6.1.1 General
+IS 456_11,34,161,2203,2364,"#### 6.1.2 Selection of Mix Proportions  
+The mix shall be designed to produce the grade of concrete...",IS 456:2000 - Plain and Reinforced Concrete,IS 456,2000,Indian Standard,Concrete,IS_456_2000.md,456,2000,6 CONCRETE MIX PROPORTIONING,6.1.2,Selection of Mix Proportions,6,,,,6.1 Mix Design,6.1.2 Selection of Mix Proportions
+IS 456_12,33,130,2364,2494,"## 7 DURABILITY OF CONCRETE  
+### 7.1 General  
+A durable concrete is one that performs satisfactori...",IS 456:2000 - Plain and Reinforced Concrete,IS 456,2000,Indian Standard,Concrete,IS_456_2000.md,456,2000,7 DURABILITY OF CONCRETE,7,DURABILITY OF CONCRETE,7,,,,7.1 General,
+IS 456_13_p0,10,37,2494,2531,### 7.2 Requirements for Durability  ,IS 456:2000 - Plain and Reinforced Concrete,IS 456,2000,Indian Standard,Concrete,IS_456_2000.md,456,2000,7 DURABILITY OF CONCRETE,7.2,Requirements for Durability,7,True,,,7.2 Requirements for Durability,
+IS 456_13_table1,102,294,2531,2825,"| Exposure | Min Cement Content (kg/m³) | Max W/C Ratio | Min Grade |
+|----------|------------------...",IS 456:2000 - Plain and Reinforced Concrete,IS 456,2000,Indian Standard,Concrete,IS_456_2000.md,456,2000,7 DURABILITY OF CONCRETE,7.2,Requirements for Durability,7,,table,True,7.2 Requirements for Durability,

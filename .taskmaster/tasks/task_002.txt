@@ -1,0 +1,11 @@
+# Task ID: 2
+# Title: Create document chunking and metadata extraction system
+# Status: pending
+# Dependencies: None
+# Priority: high
+# Description: Implement a system to chunk parsed Markdown documents by clause headers, maintaining ~1000 token chunks with proper metadata
+# Details:
+
+
+# Test Strategy:
+

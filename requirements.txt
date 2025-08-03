@@ -1,0 +1,40 @@
+# Core dependencies
+python-dotenv
+streamlit
+fastapi
+uvicorn[standard]
+
+# Database
+supabase
+pinecone-client
+
+# AI/ML
+openai
+google-generativeai
+langchain
+langchain-openai
+tiktoken
+
+# PDF processing
+PyPDF2
+# pymupdf - will install separately
+
+# Data processing
+pandas
+numpy
+pydantic
+pydantic-settings
+
+# Utilities
+httpx
+aiofiles
+python-multipart
+markdown
+PyYAML
+
+# Development
+pytest
+pytest-asyncio
+black
+flake8
+mypy
