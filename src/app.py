@@ -5,185 +5,148 @@ Main Streamlit application for IS Knowledge Hub
 import streamlit as st
 import os
 from dotenv import load_dotenv
+from pathlib import Path
 
 # Load environment variables
 load_dotenv()
 
-# Page configuration
-st.set_page_config(
-    page_title="IS Knowledge Hub",
-    page_icon="🏗️",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
+# Add project root to sys.path
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-# Custom CSS
-st.markdown("""
-<style>
-    .main {
-        padding-top: 2rem;
-    }
-    .stButton>button {
-        background-color: #1f77b4;
-        color: white;
-    }
-</style>
-""", unsafe_allow_html=True)
+from src.database import SupabaseManager
+from src.search import SearchEngine, ResultFormatter
+from src.rag import RAGService, PromptManager
+from src.embeddings import EmbeddingGenerator
+from src.database import PineconeManager
+from config import settings
 
-# Main application
-def main():
-    # Header
-    st.title("🏗️ IS Knowledge Hub")
-    st.markdown("*AI-Powered Construction Standards Engine*")
-    
-    # Sidebar
-    with st.sidebar:
-        st.header("Navigation")
-        page = st.radio(
-            "Select Page",
-            ["Home", "Upload IS Code", "Search", "Admin"],
-            index=0
+# --- INITIALIZATION ---
+def init_services():
+    """Initialize all services and store them in session state"""
+    if "services_initialized" not in st.session_state:
+        st.session_state.supabase_manager = SupabaseManager()
+        st.session_state.pinecone_manager = PineconeManager()
+        st.session_state.embedding_generator = EmbeddingGenerator()
+        st.session_state.search_engine = SearchEngine(
+            embedding_generator=st.session_state.embedding_generator,
+            pinecone_manager=st.session_state.pinecone_manager
         )
-    
-    # Main content area
-    if page == "Home":
-        show_home_page()
-    elif page == "Upload IS Code":
-        show_upload_page()
-    elif page == "Search":
-        show_search_page()
-    elif page == "Admin":
-        show_admin_page()
+        st.session_state.prompt_manager = PromptManager()
+        st.session_state.rag_service = RAGService(
+            search_engine=st.session_state.search_engine,
+            prompt_manager=st.session_state.prompt_manager
+        )
+        st.session_state.services_initialized = True
+        print("Services initialized")
 
-def show_home_page():
-    """Display the home page"""
-    st.header("Welcome to IS Knowledge Hub")
-    
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        st.markdown("""
-        ### 🎯 What is this?
-        
-        This platform transforms Indian Standards (IS) Codes for construction into a 
-        structured, searchable knowledge base using AI.
-        
-        ### ✨ Key Features
-        
-        - **📘 IS Code Ingestion**: Parse PDFs into structured Markdown
-        - **🧱 Intelligent Chunking**: Chunk by clause headers
-        - **🔍 Semantic Search**: Vector-based search
-        - **🤖 AI-Powered Q&A**: Get answers with clause citations
-        """)
-    
-    with col2:
-        st.markdown("""
-        ### 📚 Supported Standards
-        
-        - IS 10262 - Concrete Mix Proportioning
-        - IS 456 - Plain and Reinforced Concrete
-        - IS 383 - Coarse and Fine Aggregates
-        - IS 2386 - Methods of Test for Aggregates
-        - And many more...
-        
-        ### 🚀 Getting Started
-        
-        1. **Upload** your IS Code PDFs
-        2. **Search** for specific clauses or requirements
-        3. **Ask questions** and get AI-powered answers
-        """)
-
-def show_upload_page():
-    """Display the upload page"""
-    st.header("📤 Upload IS Code")
-    
+# --- UI COMPONENTS ---
+def home_page():
+    st.header("Welcome to the IS Knowledge Hub")
     st.markdown("""
-    Upload IS Code PDFs to parse and add them to the knowledge base.
-    """)
+    This platform transforms Indian Standards (IS) Codes for construction into a structured, searchable, and intelligent knowledge base.
     
-    # File uploader
-    uploaded_file = st.file_uploader(
-        "Choose an IS Code PDF file",
-        type=['pdf'],
-        help="Select a PDF file containing an IS Code document"
-    )
+    **Get started by:**
+    1.  Uploading an IS code PDF in the **Upload IS Code** page.
+    2.  Asking questions about the uploaded codes in the **Search** page.
+    """)
+
+def upload_page():
+    st.header("Upload IS Code PDF")
+    
+    uploaded_file = st.file_uploader("Choose an IS code PDF file", type="pdf")
     
     if uploaded_file is not None:
-        col1, col2 = st.columns([2, 1])
+        # Save the file to a temporary location
+        save_path = Path("data/pdfs") / uploaded_file.name
+        with open(save_path, "wb") as f:
+            f.write(uploaded_file.getbuffer())
         
-        with col1:
-            st.info(f"📄 File: {uploaded_file.name}")
-            st.info(f"📊 Size: {uploaded_file.size / 1024:.2f} KB")
-        
-        with col2:
-            if st.button("🚀 Process PDF", type="primary"):
-                with st.spinner("Processing PDF..."):
-                    st.success("✅ PDF processing functionality will be implemented soon!")
+        st.success(f"File '{uploaded_file.name}' uploaded successfully!")
+        st.info("The processing pipeline will be implemented in a future task.")
 
-def show_search_page():
-    """Display the search page"""
-    st.header("🔍 Search IS Codes")
+def search_page():
+    st.header("Search IS Codes")
+
+    # Initialize chat history
+    if "messages" not in st.session_state:
+        st.session_state.messages = []
+
+    # Display chat messages from history
+    for message in st.session_state.messages:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
+
+    # React to user input
+    if prompt := st.chat_input("Ask a question about IS codes..."):
+        # Display user message in chat message container
+        st.chat_message("user").markdown(prompt)
+        # Add user message to chat history
+        st.session_state.messages.append({"role": "user", "content": prompt})
+
+        with st.spinner("Searching for answers..."):
+            # Get response from RAG service
+            rag_service = st.session_state.rag_service
+            response = rag_service.answer_question(prompt)
+            
+            # Display assistant response in chat message container
+            with st.chat_message("assistant"):
+                st.markdown(response["answer"])
+                
+                # Show context in an expander
+                with st.expander("Show Context"):
+                    st.text(response["context"])
+            
+            # Add assistant response to chat history
+            st.session_state.messages.append({"role": "assistant", "content": response["answer"]})
+
+def admin_page():
+    st.header("Admin Dashboard")
+    st.warning("Admin functionality is under construction.")
     
-    # Search input
-    query = st.text_input(
-        "Enter your search query",
-        placeholder="e.g., What is the minimum cement content for M25 grade concrete?",
-        help="Ask questions about IS codes or search for specific clauses"
+    # Display loaded IS codes
+    st.subheader("Available IS Codes")
+    supabase_manager = st.session_state.supabase_manager
+    codes = supabase_manager.list_is_codes()
+    
+    if codes:
+        for code in codes:
+            st.write(f"- **{code.code_number}**: {code.title} (Status: {code.status})")
+    else:
+        st.info("No IS codes found in the database.")
+
+# --- MAIN APPLICATION ---
+def main():
+    """Main function to run the Streamlit application"""
+    
+    # Page configuration
+    st.set_page_config(
+        page_title="IS Knowledge Hub",
+        page_icon="🏗️",
+        layout="wide",
+        initial_sidebar_state="expanded"
     )
-    
-    # Search button
-    if st.button("🔍 Search", type="primary"):
-        if query:
-            with st.spinner("Searching..."):
-                st.info("🔍 Search functionality will be implemented soon!")
-        else:
-            st.warning("Please enter a search query")
-    
-    # Example queries
-    st.markdown("### 💡 Example Queries")
-    example_queries = [
-        "What are the durability requirements in IS 456?",
-        "How to calculate water-cement ratio for M30 concrete?",
-        "What are the exposure conditions for concrete as per IS 456?",
-        "Minimum grade of concrete for RCC work"
-    ]
-    
-    for example in example_queries:
-        if st.button(f"📌 {example}", key=example):
-            st.text_input("Enter your search query", value=example, key="search_input_example")
 
-def show_admin_page():
-    """Display the admin page"""
-    st.header("⚙️ Admin Panel")
-    
-    # Check for environment variables
-    st.subheader("🔧 Configuration Status")
-    
-    env_vars = {
-        "OPENAI_API_KEY": os.getenv("OPENAI_API_KEY"),
-        "GOOGLE_API_KEY": os.getenv("GOOGLE_API_KEY"),
-        "PINECONE_API_KEY": os.getenv("PINECONE_API_KEY"),
-        "SUPABASE_URL": os.getenv("SUPABASE_URL"),
-        "SUPABASE_KEY": os.getenv("SUPABASE_KEY")
-    }
-    
-    for var_name, var_value in env_vars.items():
-        if var_value:
-            st.success(f"✅ {var_name} is configured")
-        else:
-            st.error(f"❌ {var_name} is not configured")
-    
-    # Database status
-    st.subheader("🗄️ Database Status")
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        st.metric("Total IS Codes", "0")
-        st.metric("Total Clauses", "0")
-    
-    with col2:
-        st.metric("Total Embeddings", "0")
-        st.metric("Search Queries", "0")
+    # Initialize services
+    init_services()
+
+    # Sidebar Navigation
+    with st.sidebar:
+        st.title("🏗️ IS Knowledge Hub")
+        page = st.radio(
+            "Navigation",
+            ("Home", "Upload IS Code", "Search", "Admin")
+        )
+
+    # Page Content
+    if page == "Home":
+        home_page()
+    elif page == "Upload IS Code":
+        upload_page()
+    elif page == "Search":
+        search_page()
+    elif page == "Admin":
+        admin_page()
 
 if __name__ == "__main__":
     main()
