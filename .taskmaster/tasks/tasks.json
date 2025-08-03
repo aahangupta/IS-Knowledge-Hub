@@ -62,11 +62,44 @@
         ],
         "priority": "medium",
         "subtasks": []
+      },
+      {
+        "id": 6,
+        "title": "Create Supabase database schema and integration",
+        "description": "Create a Supabase database schema to store metadata for IS codes, and implement the necessary integration logic.",
+        "details": "",
+        "testStrategy": "",
+        "status": "done",
+        "dependencies": [],
+        "priority": "medium",
+        "subtasks": []
+      },
+      {
+        "id": 7,
+        "title": "Enhance Streamlit UI with upload and search features",
+        "description": "Enhance the Streamlit UI to include features for uploading PDF files and performing searches with the new search engine.",
+        "details": "",
+        "testStrategy": "",
+        "status": "pending",
+        "dependencies": [],
+        "priority": "medium",
+        "subtasks": []
+      },
+      {
+        "id": 8,
+        "title": "Add export functionality for clauses and documents",
+        "description": "Add functionality to the Streamlit UI to export document clauses, sections, or the full document in various formats (e.g., Markdown, plain text).",
+        "details": "",
+        "testStrategy": "",
+        "status": "pending",
+        "dependencies": [],
+        "priority": "low",
+        "subtasks": []
       }
     ],
     "metadata": {
       "created": "2025-08-03T12:34:54.167Z",
-      "updated": "2025-08-03T13:16:00.439Z",
+      "updated": "2025-08-03T13:19:14.800Z",
       "description": "Tasks for master context"
     }
   }
